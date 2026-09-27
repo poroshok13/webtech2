@@ -1,0 +1,478 @@
+/* ==========================================================================
+   Assignment 2 - Task 3: Three Layouts, One Markup (CSS Grid & Flexbox)
+   Theme: Dark minimal (black with violet accents, no animations)
+   Rules:
+   - Switching between 3 layouts by changing a single class on the container:
+       * .layout-grid (Grid of cards)
+       * .layout-list (Compact list)
+       * .layout-magazine (Magazine front page with lead item)
+   - Interactive switcher enabled via pure CSS :has() (Zero JavaScript!)
+   - HTML markup remains completely untouched
+   - CSS Grid handles all 3 container layouts
+   - Flexbox handles internal component alignment within items
+   - Strictly NO media queries (@media is forbidden)
+   - Survives varying content lengths from narrow to wide screens
+   ========================================================================== */
+
+:root {
+  /* Dark Palette: Deep Black with Violet Accents */
+  --primary: #8b5cf6;
+  --primary-light: rgba(139, 92, 246, 0.14);
+  --primary-dark: #7c3aed;
+  --accent: #d97706;
+  --surface: #111115;
+  --surface-alt: #17171d;
+  --background: #09090b;
+  --border: #23232b;
+  --border-dark: #373744;
+  --text-main: #f4f4f6;
+  --text-muted: #94949e;
+  --text-light: #63636e;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding: 2.5rem 1rem;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Header */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.header-badge {
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.page-header h1 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  color: var(--text-muted);
+  max-width: 720px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Pure CSS Layout Switcher (No JS)
+   Uses hidden radio inputs and :has() to toggle container layouts
+   ========================================================================== */
+.layout-switcher {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.65rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.switcher-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-left: 0.5rem;
+}
+
+.switcher-options {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+/* Hide native radios */
+.switcher-options input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  background-color: transparent;
+  user-select: none;
+}
+
+.switcher-btn:hover {
+  color: var(--text-main);
+  background-color: var(--surface-alt);
+}
+
+.switcher-btn .icon {
+  font-size: 1rem;
+}
+
+/* Active Radio Button Styling */
+body:has(#toggle-grid:checked) label[for="toggle-grid"],
+body:has(#toggle-list:checked) label[for="toggle-list"],
+body:has(#toggle-magazine:checked) label[for="toggle-magazine"] {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Base Article Card Styles (Shared by all 3 modes)
+   ========================================================================== */
+.article-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.article-card:hover {
+  border-color: var(--border-dark);
+}
+
+.article-thumb {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--surface-alt);
+}
+
+.article-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.article-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(9, 9, 11, 0.85);
+  color: #f4f4f6;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.article-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+
+.article-title {
+  color: var(--text-main);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.article-excerpt {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.article-author {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.article-date {
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   MODE 1: GRID OF CARDS (.layout-grid)
+   Requirement: "the number of columns follows the window width"
+   Tools: CSS Grid auto-fit for container, Flexbox column inside each item
+   ========================================================================== */
+.content-container.layout-grid,
+body:has(#toggle-grid:checked) .content-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1.5rem;
+}
+
+.content-container.layout-grid .article-card,
+body:has(#toggle-grid:checked) .content-container .article-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container.layout-grid .article-thumb,
+body:has(#toggle-grid:checked) .content-container .article-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.content-container.layout-grid .article-content,
+body:has(#toggle-grid:checked) .content-container .article-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.35rem;
+  gap: 0.65rem;
+}
+
+.content-container.layout-grid .article-title,
+body:has(#toggle-grid:checked) .content-container .article-title {
+  font-size: 1.05rem;
+}
+
+.content-container.layout-grid .article-excerpt,
+body:has(#toggle-grid:checked) .content-container .article-excerpt {
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.content-container.layout-grid .article-meta,
+body:has(#toggle-grid:checked) .content-container .article-meta {
+  margin-top: auto; /* Aligns meta to bottom */
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+}
+
+/* ==========================================================================
+   MODE 2: COMPACT LIST (.layout-list)
+   Requirement: "every item becomes a row with picture on the left,
+   title and text beside it, and date at right edge of row"
+   Tools: CSS Grid 1-column stack, Flexbox row inside each item
+   ========================================================================== */
+.content-container.layout-list,
+body:has(#toggle-list:checked) .content-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.content-container.layout-list .article-card,
+body:has(#toggle-list:checked) .content-container .article-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  gap: 1.25rem;
+  flex-wrap: wrap; /* Survives narrow screens without media queries */
+}
+
+.content-container.layout-list .article-thumb,
+body:has(#toggle-list:checked) .content-container .article-thumb {
+  width: 120px;
+  height: 85px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0; /* Picture stays firmly on the left */
+}
+
+.content-container.layout-list .article-badge,
+body:has(#toggle-list:checked) .content-container .article-badge {
+  display: none; /* Hide badge in compact list mode for clean row aesthetic */
+}
+
+.content-container.layout-list .article-content,
+body:has(#toggle-list:checked) .content-container .article-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  gap: 1.5rem;
+  min-width: 240px;
+  flex-wrap: wrap;
+}
+
+.content-container.layout-list .article-category,
+body:has(#toggle-list:checked) .content-container .article-category {
+  display: none;
+}
+
+.content-container.layout-list .article-title,
+body:has(#toggle-list:checked) .content-container .article-title {
+  font-size: 0.95rem;
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+.content-container.layout-list .article-excerpt,
+body:has(#toggle-list:checked) .content-container .article-excerpt {
+  font-size: 0.85rem;
+  flex: 2 1 240px;
+  color: var(--text-muted);
+}
+
+.content-container.layout-list .article-meta,
+body:has(#toggle-list:checked) .content-container .article-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto; /* Date pinned firmly to the right edge of the row */
+  flex-shrink: 0;
+  gap: 0.15rem;
+  padding-left: 0.75rem;
+}
+
+.content-container.layout-list .article-date,
+body:has(#toggle-list:checked) .content-container .article-date {
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   MODE 3: MAGAZINE FRONT PAGE (.layout-magazine)
+   Requirement: "one item spans several columns and rows while others
+   fill in around it"
+   Tools: CSS Grid auto-fit + dense flow + lead item span, Flexbox inside
+   ========================================================================== */
+.content-container.layout-magazine,
+body:has(#toggle-magazine:checked) .content-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  grid-auto-flow: dense; /* Backfills cells around the multi-span lead item */
+  gap: 1.5rem;
+}
+
+.content-container.layout-magazine .article-card,
+body:has(#toggle-magazine:checked) .content-container .article-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container.layout-magazine .article-thumb,
+body:has(#toggle-magazine:checked) .content-container .article-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.content-container.layout-magazine .article-content,
+body:has(#toggle-magazine:checked) .content-container .article-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.2rem;
+  gap: 0.5rem;
+}
+
+.content-container.layout-magazine .article-title,
+body:has(#toggle-magazine:checked) .content-container .article-title {
+  font-size: 1rem;
+}
+
+.content-container.layout-magazine .article-excerpt,
+body:has(#toggle-magazine:checked) .content-container .article-excerpt {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.content-container.layout-magazine .article-meta,
+body:has(#toggle-magazine:checked) .content-container .article-meta {
+  margin-top: auto;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+
+/* 
+  Lead Item in Magazine Mode:
+  - Spans 2 columns and 2 rows
+  - Other items wrap and fill in seamlessly around it
+*/
+.content-container.layout-magazine .item-lead,
+body:has(#toggle-magazine:checked) .content-container .item-lead {
+  grid-column: span min(2, 2);
+  grid-row: span 2;
+  border: 1px solid var(--primary);
+  background-color: #141419;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.1);
+}
+
+.content-container.layout-magazine .item-lead .article-thumb,
+body:has(#toggle-magazine:checked) .content-container .item-lead .article-thumb {
+  aspect-ratio: 16 / 10;
+  max-height: 280px;
+}
+
+.content-container.layout-magazine .item-lead .article-badge,
+body:has(#toggle-magazine:checked) .content-container .item-lead .article-badge {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+}
+
+.content-container.layout-magazine .item-lead .article-content,
+body:has(#toggle-magazine:checked) .content-container .item-lead .article-content {
+  padding: 1.85rem;
+  gap: 0.85rem;
+}
+
+.content-container.layout-magazine .item-lead .article-title,
+body:has(#toggle-magazine:checked) .content-container .item-lead .article-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+}
+
+.content-container.layout-magazine .item-lead .article-excerpt,
+body:has(#toggle-magazine:checked) .content-container .item-lead .article-excerpt {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}

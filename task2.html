@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2 - Component Library (Flexbox)</title>
+  <link rel="stylesheet" href="task2.css">
+</head>
+<body>
+  <div class="library-container">
+    <header class="library-header">
+      <div class="library-badge">Task 2</div>
+      <h1>UI Component Library</h1>
+      <p>5 robust components built exclusively with Flexbox. Fully fluid without Grid, floats, fixed layout sizes, or media queries.</p>
+    </header>
+
+    <!-- Component 1: Navigation Bar -->
+    <section class="component-section">
+      <div class="section-label">
+        <span class="badge">Component 1</span>
+        <h2>Navigation Bar</h2>
+        <p class="description">Logo on left, fluid links, and an actions group that stays glued to the right edge regardless of link length.</p>
+      </div>
+
+      <nav class="navbar">
+        <a href="#" class="navbar-logo">
+          <span class="logo-icon">❖</span>
+          <span class="logo-text">NexusUI</span>
+        </a>
+
+        <div class="navbar-links">
+          <a href="#" class="nav-link active">Dashboard</a>
+          <a href="#" class="nav-link">Analytics</a>
+          <a href="#" class="nav-link">Projects</a>
+          <a href="#" class="nav-link">Documentation</a>
+          <a href="#" class="nav-link">Community</a>
+          <a href="#" class="nav-link">Resources</a>
+        </div>
+
+        <div class="navbar-actions">
+          <button class="btn btn-ghost">Sign In</button>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </nav>
+    </section>
+
+    <!-- Component 2: Row of Cards -->
+    <section class="component-section">
+      <div class="section-label">
+        <span class="badge">Component 2</span>
+        <h2>Row of Equal-Height Cards</h2>
+        <p class="description">Cards with different description lengths. All cards stretch to equal height naturally, and buttons stay aligned at the bottom without fixed heights.</p>
+      </div>
+
+      <div class="cards-row">
+        <!-- Card 1: Short description -->
+        <article class="card">
+          <div class="card-tag">Starter</div>
+          <h3 class="card-title">Basic Analytics</h3>
+          <p class="card-text">
+            Track essential daily metrics with zero configuration needed.
+          </p>
+          <button class="btn btn-outline card-button">View Details</button>
+        </article>
+
+        <!-- Card 2: Medium description -->
+        <article class="card">
+          <div class="card-tag featured">Recommended</div>
+          <h3 class="card-title">Real-Time Telemetry</h3>
+          <p class="card-text">
+            Instant event streaming, custom alerting webhooks, and distributed tracing across microservices with high availability.
+          </p>
+          <button class="btn btn-primary card-button">Upgrade Plan</button>
+        </article>
+
+        <!-- Card 3: Long description -->
+        <article class="card">
+          <div class="card-tag">Enterprise</div>
+          <h3 class="card-title">Predictive Insights</h3>
+          <p class="card-text">
+            Advanced machine learning forecasting trained on historical telemetry logs. Automatically detect anomalies, estimate infrastructure capacity, and generate executive summaries.
+          </p>
+          <button class="btn btn-outline card-button">Request Demo</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Component 3: Pagination Bar -->
+    <section class="component-section">
+      <div class="section-label">
+        <span class="badge">Component 3</span>
+        <h2>Pagination Bar</h2>
+        <p class="description">Page numbers centered with flanking arrows, and result summary pinned to the right edge. Gracefully wraps on narrow viewports.</p>
+      </div>
+
+      <div class="pagination-bar">
+        <div class="pagination-spacer" aria-hidden="true"></div>
+
+        <div class="pagination-nav">
+          <button class="page-btn page-arrow" aria-label="Previous page">‹</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span class="page-ellipsis">…</span>
+          <button class="page-btn">14</button>
+          <button class="page-btn page-arrow" aria-label="Next page">›</button>
+        </div>
+
+        <div class="pagination-info">
+          Showing <strong>1–10</strong> of <strong>138</strong> entries
+        </div>
+      </div>
+    </section>
+
+    <!-- Component 4: Comment Block -->
+    <section class="component-section">
+      <div class="section-label">
+        <span class="badge">Component 4</span>
+        <h2>Comment Block</h2>
+        <p class="description">Text wraps neatly beside the gray avatar and never slides underneath it, regardless of paragraph length.</p>
+      </div>
+
+      <div class="comments-wrapper">
+        <div class="comment-block">
+          <!-- Plain gray avatar box -->
+          <div class="comment-avatar" aria-label="User Avatar"></div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">Sophia Taylor</span>
+              <span class="comment-role">Engineer</span>
+              <span class="comment-time">18 min ago</span>
+            </div>
+            <p class="comment-message">
+              The text wraps cleanly beside the avatar and maintains strict alignment without ever sliding underneath it.
+            </p>
+            <div class="comment-actions">
+              <button class="comment-action-btn">Reply</button>
+              <button class="comment-action-btn">Like (12)</button>
+              <button class="comment-action-btn">Share</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Component 5: Pricing Table -->
+    <section class="component-section">
+      <div class="section-label">
+        <span class="badge">Component 5</span>
+        <h2>Pricing Table</h2>
+        <p class="description">Three plans where the recommended option stands taller than its peers without any fixed height.</p>
+      </div>
+
+      <div class="pricing-table">
+        <!-- Plan 1: Basic -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Community</h3>
+            <p class="pricing-subtitle">For individual creators</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">$</span>
+            <span class="amount">0</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>✓ Up to 3 active projects</li>
+            <li>✓ Community forum support</li>
+            <li>✓ 5GB cloud storage</li>
+            <li>✓ 1 collaborator seat</li>
+          </ul>
+          <button class="btn btn-outline pricing-btn">Start Free</button>
+        </div>
+
+        <!-- Plan 2: Recommended (Naturally Taller) -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3 class="pricing-name">Professional</h3>
+            <p class="pricing-subtitle">For fast-growing teams</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">$</span>
+            <span class="amount">49</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>✓ Unlimited active projects</li>
+            <li>✓ Priority 24/7 technical support</li>
+            <li>✓ 250GB fast cloud storage</li>
+            <li>✓ Up to 15 team members</li>
+            <li>✓ Real-time audit log analytics</li>
+            <li>✓ Custom webhook integrations</li>
+          </ul>
+          <button class="btn btn-primary pricing-btn">Get Started</button>
+        </div>
+
+        <!-- Plan 3: Enterprise -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Enterprise</h3>
+            <p class="pricing-subtitle">Custom solutions for organizations</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">$</span>
+            <span class="amount">199</span>
+            <span class="period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>✓ Dedicated compute cluster</li>
+            <li>✓ 99.99% SLA guarantee</li>
+            <li>✓ Unlimited storage & members</li>
+            <li>✓ Single Sign-On (SSO / SAML)</li>
+          </ul>
+          <button class="btn btn-outline pricing-btn">Contact Sales</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

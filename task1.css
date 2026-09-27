@@ -1,0 +1,145 @@
+/* Assignment 2 - Task 1: Geometric Composition (CSS Grid) */
+/* Rules: CSS Grid only, no floats, no absolute positioning, no fixed sizes, no media queries */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #09090b;
+  color: #f4f4f6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: clamp(1.2rem, 3vmin, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f4f4f6;
+}
+
+.header .subtitle {
+  font-size: clamp(0.8rem, 1.8vmin, 1rem);
+  color: #8e8e99;
+  margin-top: 0.25rem;
+}
+
+.composition-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 
+  Mondrian Composition Container
+  - Strict 6x6 CSS Grid
+  - aspect-ratio: 1 / 1 keeps the composition perfectly square
+  - Fluid sizing: 78vmin ensures it scales dynamically with the window
+    and never exceeds the screen height or width
+  - Black lines are formed exclusively by the grid gap, not borders or margins
+*/
+.mondrian-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 78vmin;
+  height: 78vmin;
+  aspect-ratio: 1 / 1;
+  max-width: 90vw;
+  max-height: 80vh;
+  gap: 1vmin;
+  background-color: #050507;
+  padding: 1vmin;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid #1f1f26;
+}
+
+/* Individual blocks: No borders, no margins, no fixed sizes */
+.block {
+  width: 100%;
+  height: 100%;
+}
+
+/* 
+  Block 1: Blue block
+  Spans columns 1 to 2 (2 cols) and rows 1 to 3 (3 rows)
+*/
+.block-blue {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 3;
+  background-color: #3b6bd6;
+}
+
+/* 
+  Block 2: Top white block
+  Spans columns 3 to 6 (4 cols) and row 1 (1 row)
+*/
+.block-white-top {
+  grid-column: 3 / span 4;
+  grid-row: 1 / span 1;
+  background-color: #f7f7f5;
+}
+
+/* 
+  Block 3: Yellow block
+  Spans columns 3 to 4 (2 cols) and rows 2 to 3 (2 rows)
+*/
+.block-yellow {
+  grid-column: 3 / span 2;
+  grid-row: 2 / span 2;
+  background-color: #ecc011;
+}
+
+/* 
+  Block 4: Middle-right white block
+  Spans columns 5 to 6 (2 cols) and rows 2 to 4 (3 rows)
+*/
+.block-white-mid {
+  grid-column: 5 / span 2;
+  grid-row: 2 / span 3;
+  background-color: #f7f7f5;
+}
+
+/* 
+  Block 5: Large bottom-left red block
+  Spans columns 1 to 3 (3 cols) and rows 4 to 6 (3 rows)
+*/
+.block-red {
+  grid-column: 1 / span 3;
+  grid-row: 4 / span 3;
+  background-color: #dd2a2a;
+}
+
+/* 
+  Block 6: Black vertical accent block
+  Spans column 4 (1 col) and rows 4 to 6 (3 rows)
+*/
+.block-black {
+  grid-column: 4 / span 1;
+  grid-row: 4 / span 3;
+  background-color: #050507;
+}
+
+/* 
+  Block 7: Bottom-right white block
+  Spans columns 5 to 6 (2 cols) and rows 5 to 6 (2 rows)
+*/
+.block-white-bot {
+  grid-column: 5 / span 2;
+  grid-row: 5 / span 2;
+  background-color: #f7f7f5;
+}

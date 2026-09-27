@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 2: Advanced CSS (Flexbox & Grid)</title>
+  <style>
+    :root {
+      --bg-base: #09090b;
+      --bg-surface: #121216;
+      --bg-elevated: #18181e;
+      --border: #26262e;
+      --border-hover: #3b3b47;
+      --primary: #8b5cf6;
+      --primary-muted: rgba(139, 92, 246, 0.14);
+      --text-main: #f4f4f6;
+      --text-muted: #8e8e99;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 0.25rem 0.75rem;
+      background: var(--primary-muted);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      border: 1px solid rgba(139, 92, 246, 0.25);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      max-width: 580px;
+      font-size: 0.95rem;
+    }
+
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .task-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .task-card:hover {
+      border-color: var(--primary);
+      background: var(--bg-elevated);
+    }
+
+    .task-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+    }
+
+    .task-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .task-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .task-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="badge">Astana IT University • Web Technologies</div>
+      <h1>Assignment #2: Advanced CSS</h1>
+      <p class="subtitle">Complete implementation of Flexbox & CSS Grid practical challenges.</p>
+    </header>
+
+    <div class="tasks-grid">
+      <a href="task1.html" class="task-card">
+        <span class="task-num">Task 1</span>
+        <h2 class="task-title">Geometric Composition</h2>
+        <p class="task-desc">Single 6×6 CSS Grid reproducing Mondrian composition with fluid scaling and gap-based dividers.</p>
+        <span class="task-link">Open Task 1 →</span>
+      </a>
+
+      <a href="task2.html" class="task-card">
+        <span class="task-num">Task 2</span>
+        <h2 class="task-title">Component Library</h2>
+        <p class="task-desc">5 UI components built with pure Flexbox: Navbar, Equal-height Cards, Pagination, Comment, and Pricing Table.</p>
+        <span class="task-link">Open Task 2 →</span>
+      </a>
+
+      <a href="task3.html" class="task-card">
+        <span class="task-num">Task 3</span>
+        <h2 class="task-title">Three Layouts, One Markup</h2>
+        <p class="task-desc">12 articles displayed in 3 distinct layouts (Grid, List, Magazine) by toggling a single class on the container.</p>
+        <span class="task-link">Open Task 3 →</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
