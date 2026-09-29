@@ -1,21 +1,5 @@
-/* ==========================================================================
-   Assignment 2 - Task 3: Three Layouts, One Markup (CSS Grid & Flexbox)
-   Theme: Dark minimal (black with violet accents, no animations)
-   Rules:
-   - Switching between 3 layouts by changing a single class on the container:
-       * .layout-grid (Grid of cards)
-       * .layout-list (Compact list)
-       * .layout-magazine (Magazine front page with lead item)
-   - Interactive switcher enabled via pure CSS :has() (Zero JavaScript!)
-   - HTML markup remains completely untouched
-   - CSS Grid handles all 3 container layouts
-   - Flexbox handles internal component alignment within items
-   - Strictly NO media queries (@media is forbidden)
-   - Survives varying content lengths from narrow to wide screens
-   ========================================================================== */
-
 :root {
-  /* Dark Palette: Deep Black with Violet Accents */
+
   --primary: #8b5cf6;
   --primary-light: rgba(139, 92, 246, 0.14);
   --primary-dark: #7c3aed;
@@ -35,7 +19,6 @@
   --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -58,7 +41,6 @@ body {
   gap: 2.5rem;
 }
 
-/* Header */
 .page-header {
   display: flex;
   flex-direction: column;
@@ -93,10 +75,6 @@ body {
   line-height: 1.6;
 }
 
-/* ==========================================================================
-   Pure CSS Layout Switcher (No JS)
-   Uses hidden radio inputs and :has() to toggle container layouts
-   ========================================================================== */
 .layout-switcher {
   display: flex;
   align-items: center;
@@ -126,7 +104,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Hide native radios */
 .switcher-options input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -156,7 +133,6 @@ body {
   font-size: 1rem;
 }
 
-/* Active Radio Button Styling */
 body:has(#toggle-grid:checked) label[for="toggle-grid"],
 body:has(#toggle-list:checked) label[for="toggle-list"],
 body:has(#toggle-magazine:checked) label[for="toggle-magazine"] {
@@ -164,9 +140,6 @@ body:has(#toggle-magazine:checked) label[for="toggle-magazine"] {
   color: #ffffff;
 }
 
-/* ==========================================================================
-   Base Article Card Styles (Shared by all 3 modes)
-   ========================================================================== */
 .article-card {
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -241,11 +214,6 @@ body:has(#toggle-magazine:checked) label[for="toggle-magazine"] {
   font-weight: 500;
 }
 
-/* ==========================================================================
-   MODE 1: GRID OF CARDS (.layout-grid)
-   Requirement: "the number of columns follows the window width"
-   Tools: CSS Grid auto-fit for container, Flexbox column inside each item
-   ========================================================================== */
 .content-container.layout-grid,
 body:has(#toggle-grid:checked) .content-container {
   display: grid;
@@ -287,18 +255,12 @@ body:has(#toggle-grid:checked) .content-container .article-excerpt {
 
 .content-container.layout-grid .article-meta,
 body:has(#toggle-grid:checked) .content-container .article-meta {
-  margin-top: auto; /* Aligns meta to bottom */
+  margin-top: auto; 
   justify-content: space-between;
   border-top: 1px solid var(--border);
   padding-top: 0.85rem;
 }
 
-/* ==========================================================================
-   MODE 2: COMPACT LIST (.layout-list)
-   Requirement: "every item becomes a row with picture on the left,
-   title and text beside it, and date at right edge of row"
-   Tools: CSS Grid 1-column stack, Flexbox row inside each item
-   ========================================================================== */
 .content-container.layout-list,
 body:has(#toggle-list:checked) .content-container {
   display: grid;
@@ -313,7 +275,7 @@ body:has(#toggle-list:checked) .content-container .article-card {
   align-items: center;
   padding: 1rem 1.25rem;
   gap: 1.25rem;
-  flex-wrap: wrap; /* Survives narrow screens without media queries */
+  flex-wrap: wrap; 
 }
 
 .content-container.layout-list .article-thumb,
@@ -321,12 +283,12 @@ body:has(#toggle-list:checked) .content-container .article-thumb {
   width: 120px;
   height: 85px;
   border-radius: var(--radius-sm);
-  flex-shrink: 0; /* Picture stays firmly on the left */
+  flex-shrink: 0; 
 }
 
 .content-container.layout-list .article-badge,
 body:has(#toggle-list:checked) .content-container .article-badge {
-  display: none; /* Hide badge in compact list mode for clean row aesthetic */
+  display: none; 
 }
 
 .content-container.layout-list .article-content,
@@ -364,7 +326,7 @@ body:has(#toggle-list:checked) .content-container .article-meta {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-left: auto; /* Date pinned firmly to the right edge of the row */
+  margin-left: auto; 
   flex-shrink: 0;
   gap: 0.15rem;
   padding-left: 0.75rem;
@@ -377,17 +339,11 @@ body:has(#toggle-list:checked) .content-container .article-date {
   white-space: nowrap;
 }
 
-/* ==========================================================================
-   MODE 3: MAGAZINE FRONT PAGE (.layout-magazine)
-   Requirement: "one item spans several columns and rows while others
-   fill in around it"
-   Tools: CSS Grid auto-fit + dense flow + lead item span, Flexbox inside
-   ========================================================================== */
 .content-container.layout-magazine,
 body:has(#toggle-magazine:checked) .content-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  grid-auto-flow: dense; /* Backfills cells around the multi-span lead item */
+  grid-auto-flow: dense; 
   gap: 1.5rem;
 }
 
@@ -431,11 +387,6 @@ body:has(#toggle-magazine:checked) .content-container .article-meta {
   padding-top: 0.75rem;
 }
 
-/* 
-  Lead Item in Magazine Mode:
-  - Spans 2 columns and 2 rows
-  - Other items wrap and fill in seamlessly around it
-*/
 .content-container.layout-magazine .item-lead,
 body:has(#toggle-magazine:checked) .content-container .item-lead {
   grid-column: span min(2, 2);
